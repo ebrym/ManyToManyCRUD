@@ -102,9 +102,6 @@ namespace AndelaInterview.Api.Repository
                                   })
                                   .ToList(),
                   }).FirstOrDefaultAsync();
-
-
-
             return query;
         }
         public async Task<bool> DeleteCourse(int Id)
@@ -132,13 +129,10 @@ namespace AndelaInterview.Api.Repository
             _course.Name = course.Name;
             _course.Code = course.Code;
 
-
             if (_course != null)
             {
                 // student not mapped to course
-                var studentCourses = new List<StudentCourse>();           
-
-
+                var studentCourses = new List<StudentCourse>();  
                     foreach (var item in course.StudentId)
                     {
                         var student = await _context.Students.FirstOrDefaultAsync(x => x.Id == item);
@@ -153,15 +147,12 @@ namespace AndelaInterview.Api.Repository
                             };
                             studentCourses.Add(newStudentCourse);
                         }
-
                     }
                     _course.StudentCourses = studentCourses;            
             }
                // _context.Remove(course);
             _context.SaveChanges();
-
             return true;
         }
-
     }
 }

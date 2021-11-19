@@ -20,7 +20,6 @@ namespace AndelaInterview.Api.Repository
 
         public async Task<bool> Add(StudentRequestModel student)
         {
-
             var _student = new Student
             {
                 Address = student.Address,
@@ -35,7 +34,6 @@ namespace AndelaInterview.Api.Repository
                 foreach (var item in student.CourseId)
                 {
                     var course = await _context.Courses.FirstOrDefaultAsync(x => x.Id == item);
-
                     if (course != null)
                     {
                         var studentCourse = new StudentCourse
@@ -46,15 +44,10 @@ namespace AndelaInterview.Api.Repository
                         studentCourses.Add(studentCourse);
                     }
                 }
-
                 _student.StudentCourses = studentCourses;
-            }
-            
-
+            }           
             await _context.Students.AddAsync(_student);
-
             await _context.SaveChangesAsync();
-
             return true;
         }
 
@@ -97,9 +90,6 @@ namespace AndelaInterview.Api.Repository
                                   })
                                   .ToList(),
                   }).FirstOrDefaultAsync();
-
-
-
             return query;
         }
         public async Task<bool> Delete(int Id)
@@ -125,13 +115,10 @@ namespace AndelaInterview.Api.Repository
             _student.Address = student.Address;
             _student.Phone = student.Phone;
 
-
             if (_student != null)
             {
                 // student not mapped to course
                 var studentCourses = new List<StudentCourse>();
-
-
                 foreach (var item in student.CourseId)
                 {
                     var course = await _context.Courses.FirstOrDefaultAsync(x => x.Id == item);
@@ -146,7 +133,6 @@ namespace AndelaInterview.Api.Repository
                         };
                         studentCourses.Add(newStudentCourse);
                     }
-
                 }
                 _student.StudentCourses = studentCourses;
             }

@@ -36,50 +36,28 @@ namespace AndelaInterview.Api.Controllers
             var result = await _course.GetCourse(Id);
             return Ok(result);
         }
-
-
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CourseRequestModel course)
         {
             var result = await _course.AddCourse(course);
-            if (result)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            if (result) return Ok(result);
+            else        return BadRequest();
         }
 
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] CourseRequestModel course)
         {
             var result = await _course.Update(course);
-            if (result)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            if (result) return Ok(result);
+            else        return BadRequest();
         }
-
 
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int Id)
         {
             var result = await _course.DeleteCourse(Id);
-            if (result)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            if (result) return Ok(result);
+            else        return BadRequest();
         }
-
     }
 }
