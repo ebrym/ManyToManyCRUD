@@ -150,7 +150,6 @@ namespace AndelaInterview.Api.Repository
                     }
                     _course.StudentCourses = studentCourses;            
             }
-               // _context.Remove(course);
             _context.SaveChanges();
             return true;
         }
